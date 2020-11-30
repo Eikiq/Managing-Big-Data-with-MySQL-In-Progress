@@ -1,0 +1,47 @@
+SELECT *
+FROM TRNSACT
+WHERE sku = '3631365'
+ORDER BY orgprice DESC;
+
+SELECT *
+FROM skuinfo
+WHERE brand = 'LIZ CLAI'
+ORDER BY sku DESC;
+
+SELECT orgprice,sku
+FROM trnsact
+ORDER BY orgprice DESC;
+
+SELECT DISTINCT state
+FROM strinfo;
+
+SELECT deptdesc
+FROM deptinfo
+WHERE deptdesc= 'e%';
+
+SELECT saledate,sprice,orgprice
+FROM TRNSACT
+WHERE sprice <>orgprice
+ORDER BY saledate ASC,'sprice-orgprice' DESC;
+
+SELECT saledate,sprice,orgprice
+FROM TRNSACT
+WHERE saledate ='2004-08-01'
+ORDER BY orgprice-sprice DESC;
+
+SELECT register,saledate,orgprice,sprice
+FROM TRNSACT
+WHERE saledate BETWEEN DATE '2004-08-01'AND DATE'2004-08-10'
+ORDER BY orgprice DESC,sprice DESC;
+
+SELECT DISTINCT brand
+FROM SKUINFO
+WHERE brand LIKE '%liz%';
+
+SELECT DISTINCT store, city
+FROM store_MSA
+where city='little rock' or city='tulsa';
+
+HELP column *
+FROM strinfo;
+SELECT
