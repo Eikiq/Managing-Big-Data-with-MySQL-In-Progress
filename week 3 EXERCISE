@@ -1,0 +1,13 @@
+SELECT sku, retail, cost, COUNT(sku)
+FROM skstinfo
+GROUP BY sku, retail, cost
+
+…or retail and cost need to be aggregated to match the sku aggegration:
+
+SELECT sku, COUNT(sku), AVG(retail), AVG(cost)
+FROM skstinfo
+GROUP BY sku 
+
+The “Selected non-aggregate values must be part of the associated group” error is one of the most common
+errors new SQL learners make, so keep an eye out for it. If you see it, immediately check the columns you have
+included in your SELECT and GROUP BY clauses
