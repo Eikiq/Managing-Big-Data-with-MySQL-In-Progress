@@ -11,3 +11,17 @@ GROUP BY sku
 The “Selected non-aggregate values must be part of the associated group” error is one of the most common
 errors new SQL learners make, so keep an eye out for it. If you see it, immediately check the columns you have
 included in your SELECT and GROUP BY clauses
+
+
+0:
+Database ua_dillards; 
+
+E1:
+SELECT COUNT(DISTINCT sku)
+FROM  skuinfo;
+
+SELECT COUNT(DISTINCT sku)
+FROM  skstinfo;
+
+SELECT COUNT(DISTINCT sku)
+FROM  trnsact;
