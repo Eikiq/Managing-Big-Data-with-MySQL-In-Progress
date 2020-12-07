@@ -1,0 +1,62 @@
+Q3:
+SELECT SUM(amt),saledate
+FROM trnsact
+GROUP BY saledate
+ORDER BY SUM(amt)DESC;
+
+Q4: 因为deptinfo只能提供deptinfo里dept的数据，所以不用left join,right join.
+Remember the GROUP BY clause must contain all the non-aggregation SELECT statement columns
+SELECT d.dept, COUNT(s.sku), d.deptdesc
+FROM deptinfo d INNER JOIN skuinfo s 
+ON d.dept=s.dept
+GROUP BY d.dept,d.deptdesc
+ORDER BY COUNT(s.sku) DESC;
+
+Q7:
+SELECT SUM(t.amt - t.quantity*s.cost)/COUNT(DISTINCT t.saledate) AS AVGProfit
+FROM trnsact t LEFT JOIN SKSTINFO s
+ON t.sku = s.sku AND t.store = s.store
+WHERE t.stype = 'p';
+
+Q8:
+SELECT state,COUNT(msa),MIN(msa_pop),MAX(msa_income)
+FROM store_msa
+GROUP BY state
+WHERE state = 'NC'
+ORDER BY MIN(msa_pop)ASC, max(msa_income) desc;
+
+Q9: GROUP BY 后要加全部的non aggregated field, for teredata
+SELECT SUM(t.amt),s.dept,s.brand,s.style,s.color
+FROM trnsact t LEFT JOIN skuinfo s
+ON t.sku = s.sku
+GROUP BY s.dept,s.brand,s.style,s.color
+ORDER BY SUM(t.amt)DESC;
+
+
+Q10
+SELECT COUNT(DISTINCT sku),store
+FROM skstinfo
+GROUP BY store
+HAVING COUNT(DISTINCT sku) > 180000;
+
+Q13: 把store放在第一行第一个，对应group by 按照store 分组看。
+SELECT sm.store,sm.state,sm.city,sum(t.amt)
+FROM store_MSA sm LEFT JOIN TRNSACT t
+ON sm.store = t.store
+GROUP BY sm.store,sm.state, sm.city
+ORDER BY sum(t.amt) DESC;
+
+Q15:
+不用msa table 先检查table.看哪个table 信息行多。 Here. msa table里还有stinfo这个子集。
+SELECT state,COUNT(DISTINCT store)
+FROM STRINFO
+GROUP BY state
+HAVING COUNT(DISTINCT store) > 10;
+
+SELECT s.sku,s.style,s.size,s.vendor,s.packsize,s.brand,s.color,d.deptdesc
+FROM skuinfo s LEFT JOIN deptinfo d
+ON s.dept = d.dept
+GROUP BY s.sku,s.style,s.size,s.vendor,s.packsize,s.brand,s.color,d.deptdesc
+HAVING d.deptdesc = 'COP'
+AND s.color = 'rinse wash'
+AND s.brand = 'federal';
