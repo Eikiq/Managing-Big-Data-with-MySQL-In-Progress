@@ -1,4 +1,5 @@
 OPEN
 database ua_dillards;
 
-
+Q2:
+GROUP BY 后要加全部的non aggregated field, for teredata
